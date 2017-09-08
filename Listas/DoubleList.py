@@ -1,15 +1,17 @@
-from DoubleNode import Node
+# - Class to construct a double-linked list
+
+from DoubleNode import DoubleNode
 
 class DoubleList():
     
     def __init__(self):
         
-        self.head = None
-        self.tail = None
+        self.head = None                            # Master reference to the first item in the list.
+        self.tail = None                            # Master reference the last item in the list.
     
-    def add(self, value):
+    def add(self, value):                           # Add elements in stack format.
         
-        new = Node()
+        new = DoubleNode()
         new.value = value
         
         if(self.head == None):
@@ -19,28 +21,28 @@ class DoubleList():
         
         else:
             
-            new.L = self.head
+            new.L = self.head                       # Cross references: L for the next, R for the previous. 
             self.head.R = new
             
-            self.head = new
+            self.head = new                         # The header moves to the new node.
     
     def search(self, value):
         
-        aux = self.head
+        aux = self.head                             # Auxiliary reference for scrolling through the list.
         while(aux != None):
             if(aux.value == value):
                 break
             
-            aux = aux.L
+            aux = aux.L                             # Go to the next list item.
         
         return aux
     
     def edit(self, old, new):
         
-        target = self.search(old)
+        target = self.search(old)                   # Gets the node containing a specified load.
         
         if(target != None):
-            target.value = new
+            target.value = new                      # Updates the node payload.
     
     def insertBefore(self, tar, value):
         
@@ -50,12 +52,12 @@ class DoubleList():
             
             if(target != self.head):
                 
-                new = Node()
+                new = DoubleNode()
                 new.value = value
                 
-                bef = target.R
+                bef = target.R                      # Obtains the node immediately preceding the target node.
                 
-                bef.L = new
+                bef.L = new                         # Cross references.
                 new.R = bef
                 
                 new.L = target
@@ -71,12 +73,12 @@ class DoubleList():
         
         if(target != None):
             
-            new = Node()
+            new = DoubleNode()
             new.value = value
             
             if(target != self.tail):
                 
-                aft = target.L
+                aft = target.L                      # Retrieves the node immediately following.        
                 aft.R = new
                 new.L = aft
             
@@ -92,14 +94,14 @@ class DoubleList():
         
         if(target != None):
             
-            if(target == self.head):
+            if(target == self.head):        
                 
-                self.head = self.head.L
+                self.head = self.head.L             # Save the header by moving it to the next node in the list.
                 self.head.R = None
             
             elif(target == self.tail):
                 
-                self.tail = self.tail.R
+                self.tail = self.tail.R             # Save the queue by moving it to the previous node.
                 self.tail.L = None
             
             else:
@@ -110,10 +112,10 @@ class DoubleList():
                 bef.L = aft
                 aft.R = bef
             
-            target.L = None
+            target.L = None                         # Break the node links.
             target.R = None
             
-            del(target)
+            del(target)                             # Deletes the node from memory.
     
     def printHead(self):
         

@@ -1,6 +1,8 @@
-class Node:
+# - Double node for linked lists
+
+class DoubleNode:
     
-    value = None
+    value = None                        # Useful load
     
-    L = None
-    R = None
+    L = None                            # Internal reference for linking the following node
+    R = None                            # Internal reference for linking the previous node

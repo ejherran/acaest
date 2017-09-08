@@ -1,16 +1,18 @@
-from SimpleNode import Node
+# - Class to build a simple circular list.
+
+from SimpleNode import SimpleNode
 
 class SimpleLoopList():
     
     def __init__(self):
         
-        self.head = None
+        self.head = None                             # Master reference to the list header.    
     
     def getBeforeTo(self, tar):
         
-        aux = self.head
+        aux = self.head                             # Auxiliary reference for scrolling through the list.
         while(aux.next != tar):
-            aux = aux.next
+            aux = aux.next                          # Go to the next list item.
         
         return aux
     
@@ -24,26 +26,26 @@ class SimpleLoopList():
     
     def addStack(self, value):
         
-        new = Node()
+        new = SimpleNode()
         new.value = value
         
         if(self.head == None):
             
             self.head = new
-            self.head.next = self.head
+            self.head.next = self.head              # The header is linked to itself.
         
         else:
         
-            last = self.getLast()
+            last = self.getLast()                   # Get the last node in the list.
             
             new.next = self.head
-            last.next = new
+            last.next = new                         # The last node in the list links to the new node.
             
-            self.head = new
+            self.head = new                         # The header moves to the new node.
     
     def addTail(self, value):
         
-        new = Node()
+        new = SimpleNode()
         new.value = value
         
         if(self.head == None):
@@ -66,17 +68,17 @@ class SimpleLoopList():
             
             aux = aux.next
         
-        if(aux.value == value):
+        if(aux.value == value):                     # Check that the auxiliary contains the target load.
             return aux
         else:
             return None
     
     def edit(self, old, new):
         
-        target = self.search(old)
+        target = self.search(old)                   # Gets the node containing a specified load.
         
         if(target != None):
-            target.value = new
+            target.value = new                      # Updates the node payload.
     
     def insertBefore(self, tar, value):
         
@@ -86,12 +88,12 @@ class SimpleLoopList():
             
             if(target != self.head):
                 
-                new = Node()
+                new = SimpleNode()
                 new.value = value
                 
-                bef = self.getBeforeTo(target)
+                bef = self.getBeforeTo(target)      # Obtains the node immediately preceding the target node.
                 
-                bef.next = new
+                bef.next = new                      # The previous node links to the new node.
                 new.next = target
                 
             else:
@@ -104,7 +106,7 @@ class SimpleLoopList():
         
         if(target != None):
             
-            new = Node()
+            new = SimpleNode()
             new.value = value
             
             new.next = target.next
@@ -117,13 +119,13 @@ class SimpleLoopList():
         if(target != None):
             
             if(target == self.head):
-                self.head = self.head.next
+                self.head = self.head.next          # Save the header by moving it to the next node in the list.
             
             bef = self.getBeforeTo(target)
             bef.next = target.next
             
-            target.next = None
-            del(target)
+            target.next = None                      # Break the node link.
+            del(target)                             # Deletes the node from memory.
     
     def print(self):
         
@@ -135,18 +137,3 @@ class SimpleLoopList():
             
             if(aux == self.head):
                 break
-            
-
-l = SimpleLoopList()
-l.addTail(9)
-l.addTail(8)
-l.addTail(7)
-l.addTail(6)
-l.addTail(5)
-
-aux = l.head
-while(True):
-    
-    print(aux.value)
-    input()
-    aux = aux.next
