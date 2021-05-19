@@ -1,2 +1,2 @@
 # acaest
-Estructuras de datos academico
+Estructuras de datos académico
